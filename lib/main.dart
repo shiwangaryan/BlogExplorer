@@ -1,3 +1,4 @@
+import 'package:blogexplorer/screens/list_screen/blog_list_screen.dart';
 import 'package:blogexplorer/theme/bloc/theme_bloc.dart';
 import 'package:blogexplorer/theme/bloc/theme_state.dart';
 import 'package:flutter/material.dart';
@@ -24,20 +25,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: themeState.themeData,
-        home: Scaffold(
-          body: Container(
-            child: const Center(
-              child: Text(
-                'Helvetica here',
-                style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontSize: 50,
-                ),
-              ),
-            ),
-          ),
-        ),
+        home: const BlogListScreen(),
       );
     });
   }

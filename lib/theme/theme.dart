@@ -8,14 +8,17 @@ class AppTheme {
   //defining text styles:
   static TextStyle miniTitle(Color color) => TextStyle(
         fontFamily: 'HelveticaNeue',
-        fontWeight: FontWeight.w400,
-        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        letterSpacing: -0.6,
+        height: 1.3,
+        fontSize: 18,
         color: color,
       );
 
   static TextStyle largeTitle(Color color) => TextStyle(
         fontFamily: 'HelveticaNeue',
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w800,
+        letterSpacing: -0.3,
         fontSize: 32,
         color: color,
       );

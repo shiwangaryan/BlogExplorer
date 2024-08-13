@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:blogexplorer/theme/bloc/theme_event.dart';
 import 'package:blogexplorer/theme/bloc/theme_state.dart';
 import 'package:flutter/material.dart';
