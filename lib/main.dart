@@ -1,3 +1,4 @@
+import 'package:blogexplorer/screens/detailed_screen/blog_detail_screen.dart';
 import 'package:blogexplorer/screens/list_screen/blog_list_screen.dart';
 import 'package:blogexplorer/theme/bloc/theme_bloc.dart';
 import 'package:blogexplorer/theme/bloc/theme_state.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: themeState.themeData,
         home: const BlogListScreen(),
+        // home: const BlogDetailScreen(),
       );
     });
   }

@@ -1,8 +1,5 @@
-import 'package:blogexplorer/theme/bloc/theme_bloc.dart';
-import 'package:blogexplorer/theme/bloc/theme_state.dart';
 import 'package:blogexplorer/widgets/blog_list_widget/blog_list_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BlogListScreen extends StatelessWidget {
   const BlogListScreen({super.key});
@@ -11,12 +8,12 @@ class BlogListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: 62,
+        // leadingWidth: 50,
         leading: Container(
           margin: const EdgeInsets.only(left: 5.0, top: 5),
           child: IconButton(
             onPressed: () {},
-            iconSize: 30,
+            iconSize: 20,
             icon:
                 WidgetsBinding.instance.platformDispatcher.platformBrightness ==
                         Brightness.light
@@ -27,7 +24,7 @@ class BlogListScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(
-          top: 36,
+          top: 40,
           left: 20,
           right: 20,
           bottom: 15,
@@ -44,15 +41,18 @@ class BlogListScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Container(
-              height: 3,
+              height: 2,
               color: Colors.grey[300],
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 36),
             Expanded(
               child: ListView.builder(
+                physics: const BouncingScrollPhysics(
+                  decelerationRate: ScrollDecelerationRate.fast,
+                ),
                 itemCount: 5,
                 itemBuilder: (context, index) {
-                  return BlogListWidget();
+                  return BlogListWidget(id: index);
                 },
               ),
             ),
@@ -75,6 +75,7 @@ class BlogListScreen extends StatelessWidget {
           ),
           backgroundColor: Colors.black,
           child: const Icon(
+            size: 33,
             Icons.bookmark_rounded,
             color: Colors.white,
           ),
