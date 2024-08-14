@@ -1,7 +1,7 @@
 import 'package:blogexplorer/screens/detailed_screen/blog_detail_screen.dart';
+import 'package:blogexplorer/utils/sizes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class BlogListWidget extends StatelessWidget {
   final int id;
@@ -12,6 +12,8 @@ class BlogListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sizes = Sizes(context: context);
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -51,24 +53,21 @@ class BlogListWidget extends StatelessWidget {
               tag: 'photo-$id',
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
-                // child: Image.asset(
-                //   'assets/images/ocean.jpg',
-                //   width: 175,
-                //   height: 130,
-                //   fit: BoxFit.fill,
-                // ),
-                // child: CachedNetworkImage(
-                //   imageUrl: imgUrl,
-                //   placeholder: (context, url) =>
-                //       const CircularProgressIndicator(),
-                //   errorWidget: (context, url, error) => const Icon(Icons.error),
-                //   width: 175,
-                //   height: 130,
-                // ),
-                child: Image.network(
-                  imgUrl,
-                  width: 175,
-                  height: 130,
+                child: CachedNetworkImage(
+                  imageUrl: imgUrl,
+                  placeholder: (context, url) => Container(
+                    height: 50,
+                    width: 50,
+                    child: Image.asset('assets/images/loading_gif.gif'),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    size: 30,
+                  ),
+                  // width: 175,
+                  // height: 130,
+                  width: sizes.smallImgWidth,
+                  height: sizes.smallImgHeight,
                   fit: BoxFit.cover,
                 ),
               ),

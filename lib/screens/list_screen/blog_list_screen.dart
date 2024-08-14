@@ -8,8 +8,10 @@ class BlogListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool dark = WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+        Brightness.dark;
     final blogsList = getIt<GetItBlogService>().getBlogsList();
-    print(blogsList);
+
     return Scaffold(
       appBar: AppBar(
         // leadingWidth: 50,
@@ -18,11 +20,9 @@ class BlogListScreen extends StatelessWidget {
           child: IconButton(
             onPressed: () {},
             iconSize: 20,
-            icon:
-                WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-                        Brightness.light
-                    ? Image.asset('assets/images/menu_burger_light.png')
-                    : Image.asset('assets/images/menu_burger_dark.png'),
+            icon: !dark
+                ? Image.asset('assets/images/menu_burger_light.png')
+                : Image.asset('assets/images/menu_burger_dark.png'),
           ),
         ),
       ),
@@ -67,28 +67,7 @@ class BlogListScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.white,
-            width: 3,
-          ),
-          borderRadius: BorderRadius.circular(50),
-        ),
-        child: FloatingActionButton(
-          onPressed: () {},
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-          ),
-          backgroundColor: Colors.black,
-          child: const Icon(
-            size: 33,
-            Icons.bookmark_rounded,
-            color: Colors.white,
-          ),
-        ),
-      ),
+
     );
   }
 }
