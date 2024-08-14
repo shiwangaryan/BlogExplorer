@@ -1,10 +1,14 @@
 import 'package:blogexplorer/screens/detailed_screen/blog_detail_screen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class BlogListWidget extends StatelessWidget {
   final int id;
-  const BlogListWidget({super.key, required this.id});
+  final String title;
+  final String imgUrl;
+  const BlogListWidget(
+      {super.key, required this.id, required this.title, required this.imgUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +20,8 @@ class BlogListWidget extends StatelessWidget {
             builder: (context) {
               return BlogDetailScreen(
                 id: id,
-                asset: 'assets/images/ocean.jpg',
-                title: 'Best places to go on vacation this summer.',
+                asset: imgUrl,
+                title: title,
               );
             },
           ),
@@ -45,15 +49,27 @@ class BlogListWidget extends StatelessWidget {
           children: [
             Hero(
               tag: 'photo-$id',
-              child: Material(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.asset(
-                    'assets/images/ocean.jpg',
-                    width: 175,
-                    height: 130,
-                    fit: BoxFit.cover,
-                  ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                // child: Image.asset(
+                //   'assets/images/ocean.jpg',
+                //   width: 175,
+                //   height: 130,
+                //   fit: BoxFit.fill,
+                // ),
+                // child: CachedNetworkImage(
+                //   imageUrl: imgUrl,
+                //   placeholder: (context, url) =>
+                //       const CircularProgressIndicator(),
+                //   errorWidget: (context, url, error) => const Icon(Icons.error),
+                //   width: 175,
+                //   height: 130,
+                // ),
+                child: Image.network(
+                  imgUrl,
+                  width: 175,
+                  height: 130,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -67,7 +83,7 @@ class BlogListWidget extends StatelessWidget {
                   children: [
                     const SizedBox(height: 13),
                     Text(
-                      'Best places to go on vacation this summer.',
+                      title,
                       style: Theme.of(context).textTheme.headlineSmall,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,

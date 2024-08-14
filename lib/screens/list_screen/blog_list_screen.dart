@@ -1,3 +1,5 @@
+import 'package:blogexplorer/main.dart';
+import 'package:blogexplorer/service/get_it/get_it_blog_service.dart';
 import 'package:blogexplorer/widgets/blog_list_widget/blog_list_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +8,8 @@ class BlogListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final blogsList = getIt<GetItBlogService>().getBlogsList();
+    print(blogsList);
     return Scaffold(
       appBar: AppBar(
         // leadingWidth: 50,
@@ -50,9 +54,13 @@ class BlogListScreen extends StatelessWidget {
                 physics: const BouncingScrollPhysics(
                   decelerationRate: ScrollDecelerationRate.fast,
                 ),
-                itemCount: 5,
+                itemCount: blogsList.length,
                 itemBuilder: (context, index) {
-                  return BlogListWidget(id: index);
+                  return BlogListWidget(
+                    id: index,
+                    title: blogsList[index].title ?? '',
+                    imgUrl: blogsList[index].imageurl ?? '',
+                  );
                 },
               ),
             ),

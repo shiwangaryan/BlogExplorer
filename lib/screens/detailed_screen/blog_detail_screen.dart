@@ -29,6 +29,7 @@ class BlogDetailScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 40),
             Padding(
@@ -46,15 +47,13 @@ class BlogDetailScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Hero(
                 tag: 'photo-$id',
-                child: Material(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      asset,
-                      width: double.infinity,
-                      height: 320,
-                      fit: BoxFit.cover,
-                    ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    asset,
+                    width: double.infinity,
+                    height: 320,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

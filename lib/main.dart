@@ -1,12 +1,22 @@
-import 'package:blogexplorer/screens/detailed_screen/blog_detail_screen.dart';
+import 'dart:ui';
+
 import 'package:blogexplorer/screens/list_screen/blog_list_screen.dart';
+import 'package:blogexplorer/service/api/api_method.dart';
+import 'package:blogexplorer/service/get_it/get_it_blog_service.dart';
 import 'package:blogexplorer/theme/bloc/theme_bloc.dart';
 import 'package:blogexplorer/theme/bloc/theme_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
-void main() {
+final getIt = GetIt.instance;
+
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
+  getIt.registerSingleton<GetItBlogService>(GetItBlogService());
+  await getAPIBlogs();
+
   runApp(
     MultiBlocProvider(
       providers: [
@@ -29,7 +39,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: themeState.themeData,
         home: const BlogListScreen(),
-        // home: const BlogDetailScreen(),
       );
     });
   }
