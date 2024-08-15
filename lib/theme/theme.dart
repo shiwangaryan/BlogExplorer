@@ -11,7 +11,7 @@ class AppTheme {
         fontWeight: FontWeight.w600,
         letterSpacing: -0.6,
         height: 1.3,
-        fontSize: 18,
+        fontSize: 16,
         color: color,
       );
 
@@ -19,7 +19,7 @@ class AppTheme {
         fontFamily: 'HelveticaNeue',
         fontWeight: FontWeight.w800,
         letterSpacing: -0.3,
-        fontSize: 32,
+        fontSize: 30,
         color: color,
       );
 

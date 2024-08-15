@@ -1,10 +1,11 @@
 import 'package:blogexplorer/screens/detailed_screen/blog_detail_screen.dart';
+import 'package:blogexplorer/service/hive/hive_services.dart';
 import 'package:blogexplorer/utils/sizes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class BlogListWidget extends StatelessWidget {
-  final int id;
+  final String id;
   final String title;
   final String imgUrl;
   const BlogListWidget(
@@ -50,12 +51,12 @@ class BlogListWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Hero(
-              tag: 'photo-$id',
+              tag: id,
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 child: CachedNetworkImage(
                   imageUrl: imgUrl,
-                  placeholder: (context, url) => Container(
+                  placeholder: (context, url) => SizedBox(
                     height: 50,
                     width: 50,
                     child: Image.asset('assets/images/loading_gif.gif'),
@@ -89,11 +90,14 @@ class BlogListWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Transform.translate(
-                      offset: const Offset(-4, 0),
-                      child: const Icon(
-                        // Icons.bookmark_border_rounded,
-                        Icons.bookmark_rounded,
-                        size: 20,
+                      offset: const Offset(-17, -12),
+                      child: IconButton(
+                        onPressed: () {
+                          HiveServices().addBookmark(id, title, imgUrl);
+                        },
+                        icon: const Icon(Icons.bookmark_border_rounded),
+                        // icon: const Icon(Icons.bookmark_rounded),
+                        iconSize: 20,
                       ),
                     )
                   ],

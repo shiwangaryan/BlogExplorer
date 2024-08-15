@@ -1,6 +1,6 @@
 import 'package:blogexplorer/main.dart';
 import 'package:blogexplorer/service/get_it/get_it_blog_service.dart';
-import 'package:blogexplorer/widgets/blog_list_widget/blog_list_widget.dart';
+import 'package:blogexplorer/widgets/blog_list_widget.dart';
 import 'package:flutter/material.dart';
 
 class BlogListScreen extends StatelessWidget {
@@ -49,25 +49,32 @@ class BlogListScreen extends StatelessWidget {
               color: Colors.grey[300],
             ),
             const SizedBox(height: 36),
-            Expanded(
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(
-                  decelerationRate: ScrollDecelerationRate.fast,
-                ),
-                itemCount: blogsList.length,
-                itemBuilder: (context, index) {
-                  return BlogListWidget(
-                    id: index,
-                    title: blogsList[index].title ?? '',
-                    imgUrl: blogsList[index].imageurl ?? '',
-                  );
-                },
-              ),
-            ),
+            blogsList.isEmpty
+                ? Text(
+                    'Oops! no blogs available at the moment.',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(fontSize: 23),
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(
+                        decelerationRate: ScrollDecelerationRate.fast,
+                      ),
+                      itemCount: blogsList.length,
+                      itemBuilder: (context, index) {
+                        return BlogListWidget(
+                          id: blogsList[index].id!,
+                          title: blogsList[index].title!,
+                          imgUrl: blogsList[index].imageurl!,
+                        );
+                      },
+                    ),
+                  ),
           ],
         ),
       ),
-
     );
   }
 }

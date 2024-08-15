@@ -1,10 +1,10 @@
-import 'package:blogexplorer/screens/bookmarks_screen/bookmarks_screen.dart';
 import 'package:blogexplorer/utils/sizes.dart';
+import 'package:blogexplorer/widgets/floating_action_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class BlogDetailScreen extends StatelessWidget {
-  final int id;
+  final String id;
   final String asset;
   final String title;
   const BlogDetailScreen(
@@ -44,14 +44,14 @@ class BlogDetailScreen extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(fontSize: 40, height: 1),
+                      .copyWith(fontSize: 38, height: 1),
                 ),
               ),
               const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Hero(
-                  tag: 'photo-$id',
+                  tag: id,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: CachedNetworkImage(
@@ -70,23 +70,24 @@ class BlogDetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 9),
+                padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     IconButton(
                       onPressed: () {},
                       icon: Icon(
-                        Icons.bookmark_rounded,
+                        Icons.bookmark_border_rounded,
+                        // Icons.bookmark_rounded,
                         color: dark ? Colors.white : Colors.black,
                         size: 28,
                       ),
                     ),
-                    const SizedBox(width: 0),
                     Transform.translate(
-                      offset: const Offset(-5, 10),
+                      offset: const Offset(-3, 9.9),
                       child: Text(
                         'Bookmark article',
+                        // 'Remove bookmark',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
@@ -101,39 +102,7 @@ class BlogDetailScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: Container(
-        height: 60,
-        width: 60,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.white,
-            width: 3,
-          ),
-          borderRadius: BorderRadius.circular(50),
-        ),
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const BookmarksScreen();
-                },
-              ),
-            );
-          },
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-          ),
-          backgroundColor: Colors.black,
-          child: const Icon(
-            size: 32,
-            Icons.bookmark_rounded,
-            color: Colors.white,
-          ),
-        ),
-      ),
+      floatingActionButton: const CustomFloatingActionButton(),
     );
   }
 }
