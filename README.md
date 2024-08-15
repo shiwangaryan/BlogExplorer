@@ -1,6 +1,10 @@
 # Blog Explorer
 <p id="description">Blog Explorer is a feature-rich mobile application that allows users to explore blogs, bookmark their favorite ones, and enjoy a smooth reading experience with a clean, minimalistic UI design. The app leverages REST API for fetching blog data, Hive for offline storage, and Bloc for state management to provide a seamless experience.</p>
 </br>
+<h2>📱 App's apk</h2>
+</br>
+https://drive.google.com/file/d/1LaJlh5poyx14Ylh7M78IjsvKgBmKbo4c/view?usp=drive_link
+</br>
 <h2>🧐 Features</h2>
 </br>
 Here are some of the key features of the Blog Explorer app:
