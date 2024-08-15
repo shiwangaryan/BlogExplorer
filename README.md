@@ -61,7 +61,7 @@ flutter build apk --release
 <p>5. Now once the apk is built simply install app in your device using this command: </p>
 
 ```
-flutter intall
+flutter install
 ```
 (Note: prevent running app in debug mode for smoother experience and follow the above two commands for release app version.)
 </br>
