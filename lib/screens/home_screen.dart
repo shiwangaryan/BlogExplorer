@@ -17,6 +17,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       drawer: customDrawer(context),
       appBar: AppBar(
+        flexibleSpace:
+            Container(color: Theme.of(context).scaffoldBackgroundColor),
         leading: Builder(builder: (context) {
           return Container(
             margin: const EdgeInsets.only(left: 5.0, top: 5),
