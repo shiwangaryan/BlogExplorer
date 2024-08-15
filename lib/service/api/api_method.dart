@@ -15,11 +15,9 @@ Future<void> getAPIBlogs() async {
       headers: {urlHeader: adminSecretKey},
     );
     if(response.statusCode== 200) {
-      // print(response.body);
       var jsonBody= jsonDecode(response.body);
       List<BlogModel> blogList= BlogResponseList.fromJson(jsonBody).blogList;
       getIt<GetItBlogService>().setBlogList(blogList);
-      print(blogList);
     }
     else {
       print("error with code: ${response.statusCode}");

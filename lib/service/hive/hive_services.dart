@@ -16,4 +16,9 @@ class HiveServices {
       print(bookmarksBox.getAt(i)[0]);
     }
   }
+
+  void removeBookmark(String key) {
+    bookmarksBox.delete(key);
+    readBlogs();
+  }
 }

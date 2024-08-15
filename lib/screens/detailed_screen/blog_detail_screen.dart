@@ -1,7 +1,9 @@
+import 'package:blogexplorer/service/hive/hive_services.dart';
 import 'package:blogexplorer/utils/sizes.dart';
 import 'package:blogexplorer/widgets/floating_action_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class BlogDetailScreen extends StatelessWidget {
   final String id;
@@ -59,7 +61,7 @@ class BlogDetailScreen extends StatelessWidget {
                       placeholder: (context, url) =>
                           Image.asset('assets/images/loading_gif.gif'),
                       errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                          Image.asset('assets/images/placeholder_image.png'),
                       width: double.infinity,
                       height: sizes.largeImgHeight,
                       // height: 320,
@@ -70,31 +72,65 @@ class BlogDetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.bookmark_border_rounded,
-                        // Icons.bookmark_rounded,
-                        color: dark ? Colors.white : Colors.black,
-                        size: 28,
-                      ),
-                    ),
-                    Transform.translate(
-                      offset: const Offset(-3, 9.9),
-                      child: Text(
-                        'Bookmark article',
-                        // 'Remove bookmark',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: ValueListenableBuilder<Box>(
+                  valueListenable: Hive.box('bookmarks').listenable(),
+                  builder: (context, box, widget) {
+                    return box.get(id) == null
+                        ? GestureDetector(
+                            onTap: () {
+                              HiveServices().addBookmark(id, title, asset);
+                            },
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.bookmark_border_rounded,
+                                  color: dark ? Colors.white : Colors.black,
+                                  size: 28,
+                                ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  'Bookmark article',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                ),
+                              ],
                             ),
-                      ),
-                    ),
-                  ],
+                          )
+                        : GestureDetector(
+                            onTap: () {
+                              HiveServices().removeBookmark(id);
+                            },
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.bookmark_rounded,
+                                  color: dark ? Colors.white : Colors.black,
+                                  size: 28,
+                                ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  'Remove bookmark',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          );
+                  },
                 ),
               ),
               const SizedBox(height: 30),

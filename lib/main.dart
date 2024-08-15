@@ -1,24 +1,18 @@
-import 'package:blogexplorer/screens/list_screen/blog_list_screen.dart';
-import 'package:blogexplorer/service/api/api_method.dart';
-import 'package:blogexplorer/service/get_it/get_it_blog_service.dart';
-import 'package:blogexplorer/theme/bloc/theme_bloc.dart';
-import 'package:blogexplorer/theme/bloc/theme_state.dart';
+import 'package:blogexplorer/screens/home_screen.dart';
+import 'package:blogexplorer/screens/loading_screen.dart/loading_screen.dart';
+import 'package:blogexplorer/service/bloc/navigation_bloc/navigation_bloc.dart';
+import 'package:blogexplorer/service/cubit/loading_cubit.dart';
+import 'package:blogexplorer/service/cubit/loading_state.dart';
+import 'package:blogexplorer/service/bloc/theme_bloc/theme_bloc.dart';
+import 'package:blogexplorer/service/bloc/theme_bloc/theme_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 final getIt = GetIt.instance;
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Hive.initFlutter();
-  await Hive.openBox('allBlogs');
-  await Hive.openBox('bookmarks');
-
-  getIt.registerSingleton<GetItBlogService>(GetItBlogService());
-  await getAPIBlogs();
 
   runApp(
     MultiBlocProvider(
@@ -26,6 +20,12 @@ void main() async {
         BlocProvider(
           create: (_) => ThemeBloc(),
         ),
+        BlocProvider(
+          create: (_) => NavigationBloc(),
+        ),
+        BlocProvider(
+          create: (_) => LoadingCubit()..initializeApp(),
+        )
       ],
       child: const MyApp(),
     ),
@@ -37,12 +37,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: themeState.themeData,
-        home: const BlogListScreen(),
-      );
+    return BlocBuilder<LoadingCubit, LoadingState>(
+      builder: (context, state) {
+      if (state is LoadingComplete) {
+        return BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, themeState) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: themeState.themeData,
+              home: const HomeScreen(),
+            );
+          },
+        );
+      }
+      return const LoadingScreen();
     });
   }
 }

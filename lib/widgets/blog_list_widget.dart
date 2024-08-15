@@ -3,6 +3,7 @@ import 'package:blogexplorer/service/hive/hive_services.dart';
 import 'package:blogexplorer/utils/sizes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class BlogListWidget extends StatelessWidget {
   final String id;
@@ -61,10 +62,8 @@ class BlogListWidget extends StatelessWidget {
                     width: 50,
                     child: Image.asset('assets/images/loading_gif.gif'),
                   ),
-                  errorWidget: (context, url, error) => const Icon(
-                    Icons.error,
-                    size: 30,
-                  ),
+                  errorWidget: (context, url, error) =>
+                      Image.asset('assets/images/placeholder_image.png'),
                   // width: 175,
                   // height: 130,
                   width: sizes.smallImgWidth,
@@ -88,16 +87,33 @@ class BlogListWidget extends StatelessWidget {
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 8),
                     Transform.translate(
                       offset: const Offset(-17, -12),
-                      child: IconButton(
-                        onPressed: () {
-                          HiveServices().addBookmark(id, title, imgUrl);
+                      child: ValueListenableBuilder<Box>(
+                        valueListenable: Hive.box('bookmarks').listenable(),
+                        builder: (context, box, widget) {
+                          return box.get(id) == null
+                              ? IconButton(
+                                  onPressed: () {
+                                    HiveServices()
+                                        .addBookmark(id, title, imgUrl);
+                                  },
+                                  icon:
+                                      const Icon(Icons.bookmark_border_rounded),
+                                  // icon: const Icon(Icons.bookmark_rounded),
+                                  iconSize: 20,
+                                )
+                              : IconButton(
+                                  onPressed: () {
+                                    HiveServices().removeBookmark(id);
+                                  },
+                                  // icon: const Icon(
+                                  // Icons.bookmark_border_rounded),
+                                  icon: const Icon(Icons.bookmark_rounded),
+                                  iconSize: 20,
+                                );
                         },
-                        icon: const Icon(Icons.bookmark_border_rounded),
-                        // icon: const Icon(Icons.bookmark_rounded),
-                        iconSize: 20,
                       ),
                     )
                   ],
