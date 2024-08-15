@@ -24,7 +24,8 @@
 </br>
 <h2>📱 App's apk</h2>
 </br>
-https://drive.google.com/file/d/1LaJlh5poyx14Ylh7M78IjsvKgBmKbo4c/view?usp=drive_link
+Link: https://drive.google.com/file/d/1LaJlh5poyx14Ylh7M78IjsvKgBmKbo4c/view?usp=drive_link
+</br>
 </br>
 <h2>🧐 Features</h2>
 </br>
