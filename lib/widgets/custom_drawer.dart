@@ -43,6 +43,7 @@ Drawer customDrawer(BuildContext context) {
                                 context
                                     .read<NavigationBloc>()
                                     .add(NavigationChangeTo(1));
+                                Navigator.pop(context);
                               },
                               child: Text(
                                 'Bookmarks',
@@ -65,6 +66,7 @@ Drawer customDrawer(BuildContext context) {
                                 context
                                     .read<NavigationBloc>()
                                     .add(NavigationChangeTo(0));
+                                Navigator.pop(context);
                               },
                               child: Text(
                                 'Home',
