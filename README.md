@@ -1,6 +1,27 @@
 # Blog Explorer
 <p id="description">Blog Explorer is a feature-rich mobile application that allows users to explore blogs, bookmark their favorite ones, and enjoy a smooth reading experience with a clean, minimalistic UI design. The app leverages REST API for fetching blog data, Hive for offline storage, and Bloc for state management to provide a seamless experience.</p>
 </br>
+<h2>Project Screenshots:</h2>
+</br>
+
+<img src="https://github.com/user-attachments/assets/0bf22011-b157-4fea-8a0f-c561b8816146" width="210" height="460/">
+
+<img src="https://github.com/user-attachments/assets/eeb3ff28-0c8e-4762-8791-462942573ff1" alt="project-screenshot" width="210" height="460/">
+
+<img src="https://github.com/user-attachments/assets/e6711ea9-b2b1-4dd4-9b4e-c8143e5a81e7" alt="project-screenshot" width="210" height="460/">
+
+<img src="https://github.com/user-attachments/assets/d56222a2-f8c9-4d63-b5c7-caf7c17d4b70" alt="project-screenshot" width="210" height="460/">
+
+<img src="https://github.com/user-attachments/assets/20717632-dfa3-4d5a-a892-84a5335d7e78" alt="project-screenshot" width="210" height="460/">
+
+<img src="https://github.com/user-attachments/assets/15941f9c-47fc-4de3-8609-86fcaa3bc7e7" alt="project-screenshot" width="210" height="460/">
+
+<img src="https://github.com/user-attachments/assets/6ff393e9-8a80-4abb-9b48-1086b4c33e5c" alt="project-screenshot" width="210" height="460/">
+
+<img src="https://github.com/user-attachments/assets/86a312f7-f680-477c-be06-42862237c0a5" alt="project-screenshot" width="210" height="460/">
+</p>
+  
+</br>
 <h2>📱 App's apk</h2>
 </br>
 https://drive.google.com/file/d/1LaJlh5poyx14Ylh7M78IjsvKgBmKbo4c/view?usp=drive_link
