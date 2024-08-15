@@ -11,6 +11,8 @@ class BookmarksScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace:
+            Container(color: Theme.of(context).scaffoldBackgroundColor),
         leading: IconButton(
           padding: const EdgeInsets.only(left: 0, top: 1),
           color: dark ? Colors.white : Colors.black,
